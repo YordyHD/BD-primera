@@ -39,17 +39,23 @@ create table Agendamiento(
 create table Servicios(
 	idservicios integer primary key auto_increment,
     valor float,
-    categoria integer
+    cantidad integer
+    idcategoria
+    
 );
 
 create table Productos(
 	idproducto integer primary key auto_increment,
 	valor float,
-    cantidad integer,
-    categoria integer,
-    URL varchar(255)
+    cantidad integer
 );
 
+create table Categoria(
+	idcategoria integer primary key auto_increment,
+    descripcion varchar (255),
+    URL varchar (255),
+    nombre_c varchar (100)
+);
 
 create table Factura(
 	idfactura integer primary key auto_increment,
@@ -76,6 +82,12 @@ add foreign key (idtrabajador) references Trabajador(idtrabajador);
 
 alter table Factura
 add foreign key (idbarberia) references Barberiaxx(idbarberia);
+
+alter table Productos
+add foreign key (idcategoria) references Categoria(idcategoria);
+
+alter table Servicios
+add foreign key (idcategoria) references Categoria(idcategoria);
 
 alter table Productos change column valor price float;
 alter table Barberiaxx change column horarios horarioa time;
